@@ -1,2 +1,0 @@
-# eks-ecs
-project-support
