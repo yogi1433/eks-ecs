@@ -18,9 +18,9 @@ terraform {
 #}
 
 # Docker Provider Configuration
-provider "docker" {
-  host = "unix:///var/run/docker.sock"
-}
+#provider "docker" {
+#  host = "unix:///var/run/docker.sock"
+#}
 
 # Variables
 variable "python_repo_name" {
