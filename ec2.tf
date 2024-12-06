@@ -1,16 +1,19 @@
 resource "aws_instance" "eks_manager" {
   ami           = "ami-0614680123427b75e" # Official Ubuntu 22.04 AMI (replace with the correct one for your region)
   instance_type = "t2.micro"
-  subnet_id     = aws_subnet.public[0].id
+  #subnet_id     = aws_subnet.public[0].id
   vpc_security_group_ids = [aws_security_group.eks_manager_sg.id]
   key_name      = "kubectl"
   iam_instance_profile = "kubectl-iam"
-  user_data                    = file("script.sh") 
+  user_data                    = file("app.sh") 
+  root_block_device {
+    volume_size = 25
+    volume_type = "gp2"
+  }
   tags = {
     Name = "eks-manager"
   }
-
-     
+      
 }
 
 output "jenkins_admin_password" {
@@ -20,7 +23,7 @@ output "jenkins_admin_password" {
 
 resource "aws_security_group" "eks_manager_sg" {
   name   = "eks-manager-sg"
-  vpc_id = aws_vpc.eks-cluster-vpc.id
+ # vpc_id = aws_vpc.eks-cluster-vpc.id
 
   ingress {
     from_port   = 0
