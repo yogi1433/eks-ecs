@@ -41,7 +41,7 @@ resource "aws_ecr_repository" "my_app_name" {
 resource "docker_image" "my_app_name" {
   name = "${aws_ecr_repository.my_app_name.repository_url}:latest"
   build {
-    context    = "/home/latheef/ecr-eks-proj/docker/my_web_app"
+    context    = "/var/lib/jenkins/workspace/eks-ecr/eks-ecs/docker/my_web_app"
     dockerfile = "Dockerfile"
   }
 }
